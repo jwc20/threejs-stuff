@@ -3,11 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>My first three.js app</title>
+    <link rel="stylesheet" href="/style.css">
     <style>
       body { margin: 0; }
     </style>
   </head>
   <body>
+    <label class="scene-picker">
+      Example
+      <select id="example-select">
+        <option value="cube">Cube</option>
+        <option value="line">Line</option>
+        <option value="loading3dModel">Loading 3D Model</option>
+      </select>
+    </label>
+    <div id="app"></div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

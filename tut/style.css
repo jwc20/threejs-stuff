@@ -1,0 +1,41 @@
+.scene-picker {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  display: flex;
+  font: 14px/1.4 system-ui, sans-serif;
+  gap: 8px;
+  left: 16px;
+  padding: 10px 12px;
+  position: fixed;
+  top: 16px;
+  z-index: 1;
+}
+
+.scene-picker select {
+  font: inherit;
+}
+
+.model-status {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  bottom: 16px;
+  font: 14px/1.4 system-ui, sans-serif;
+  left: 16px;
+  margin: 0;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 10px 12px;
+  position: fixed;
+}
+
+canvas {
+  display: block;
+}
+
+.orbit-canvas {
+  cursor: grab;
+}
+
+.orbit-canvas.is-dragging {
+  cursor: grabbing;
+}

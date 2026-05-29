@@ -1,36 +1,27 @@
-import * as THREE from "three";
+import { createCubeScene } from "./cube.js";
+import { createLineScene } from "./line.js";
+import { createLoading3dModelScene } from "./loading3dModel.js";
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 500);
-camera.position.set(0, 0, 100);
-camera.lookAt(0, 0, 0);
+const app = document.querySelector("#app");
+const select = document.querySelector("#example-select");
 
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setAnimationLoop(animate);
-document.body.appendChild(renderer.domElement);
+const scenes = {
+  cube: createCubeScene,
+  line: createLineScene,
+  loading3dModel: createLoading3dModelScene,
+};
 
-// const geometry = new THREE.BoxGeometry(1, 1, 1);
-// const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-// const cube = new THREE.Mesh(geometry, material);
-// scene.add(cube);
+let cleanupScene = () => {};
 
-const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
+function loadScene(name) {
+  cleanupScene();
+  app.replaceChildren();
 
-const points = [];
-points.push(new THREE.Vector3(-10, 0, 0));
-points.push(new THREE.Vector3(0, 10, 0));
-points.push(new THREE.Vector3(10, 0, 0));
-
-const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-const line = new THREE.Line(lineGeometry, lineMaterial);
-
-scene.add(line);
-renderer.render(scene, camera);
-
-function animate(time) {
-  cube.rotation.x = time / 2000;
-  cube.rotation.y = time / 1000;
-
-  renderer.render(scene, camera);
+  cleanupScene = scenes[name](app);
 }
+
+select.addEventListener("change", () => {
+  loadScene(select.value);
+});
+
+loadScene(select.value);
